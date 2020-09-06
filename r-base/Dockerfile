@@ -38,8 +38,6 @@ WORKDIR /home/yogi
 RUN mkdir -p /home/yogi/.R/lib
 ENV R_LIBS="/home/yogi/.R/lib"
 
-RUN mkdir /home/yogi/covid
-
 # copy requirements separately from code for better caching
 COPY requirements.R /home/yogi/requirements.R
 RUN  Rscript --vanilla /home/yogi/requirements.R
