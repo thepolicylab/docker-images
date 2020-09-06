@@ -24,9 +24,9 @@ GH_PKGS <- c("tidyverse/googlesheets4")
 
 #' Return whether the package with the given name is installed
 #'
-#' @param pkg_name The name of the package to check if it is installed
-is_installed <- function(pkg_name) {
-    return(pkg_name %in% installed.packages()[, 1])
+#' @param pkg The name of the package to check if it is installed
+is_installed <- function(pkg) {
+    return(pkg %in% installed.packages()[, 1])
 }
 
 #' This is a quick function to perform package installs for both the
@@ -38,7 +38,7 @@ is_installed <- function(pkg_name) {
 install_pkgs <- function(pkg_vec, cran = TRUE, force = FALSE) {
     if (cran) {
         for (pkg in pkg_vec) {
-            if (force | !is_installed(pkg_name)) {
+            if (force | !is_installed(pkg)) {
                 install.packages(
                     pkg,
                     repos = "https://cran.r-project.org",
@@ -48,7 +48,7 @@ install_pkgs <- function(pkg_vec, cran = TRUE, force = FALSE) {
         }
     } else {
         for (pkg in pkg_vec) {
-            if (force | !is_installed(pkg_name)) {
+            if (force | !is_installed(pkg)) {
                 devtools::install_github(pkg)
             }
         }
